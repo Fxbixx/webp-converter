@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PixelPress · WebP Converter</title>
+    <meta
+      name="description"
+      content="PixelPress konvertiert Bilder schnell zu WebP, mit 750×1000 Auto-Crop, Batch-Upload und komplett browserbasiertem Workflow."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <span class="badge">PixelPress · 100% Browserbasiert · kostenlos hostbar</span>
+          <h1>Produktbilder schnell auf 750×1000 WebP bringen.</h1>
+          <p>
+            Bilder hochladen, automatisch mittig auf 750×1000 zuschneiden und direkt als WebP
+            herunterladen — einzeln oder im Batch, ohne Server und ohne laufende Kosten.
+          </p>
+        </div>
+      </section>
+
+      <section class="card grid">
+        <div class="panel panel-upload">
+          <label class="dropzone" id="dropzone">
+            <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden />
+            <div class="dropzone-inner">
+              <div class="drop-icon">⬆</div>
+              <h2>Bilder hochladen</h2>
+              <p>Drag & Drop oder klicken</p>
+              <small>Mehrere JPEG, PNG oder WebP gleichzeitig</small>
+            </div>
+          </label>
+
+          <div class="controls">
+            <div class="field-group preset-box">
+              <label>Standard-Workflow</label>
+              <div class="preset-pill">Auto Center Crop · 750 × 1000 · WebP</div>
+            </div>
+
+            <div class="field-group">
+              <label for="mode">Resize-Modus</label>
+              <select id="mode">
+                <option value="cover" selected>Cover · mittig zuschneiden</option>
+                <option value="contain">Contain · nichts abschneiden</option>
+                <option value="stretch">Exact · exakt auf Maße ziehen</option>
+              </select>
+            </div>
+
+            <div class="two-col">
+              <div class="field-group">
+                <label for="width">Breite</label>
+                <input id="width" type="number" min="1" value="750" />
+              </div>
+              <div class="field-group">
+                <label for="height">Höhe</label>
+                <input id="height" type="number" min="1" value="1000" />
+              </div>
+            </div>
+
+            <div class="field-group toggle-row">
+              <div>
+                <label for="keepAspect">Seitenverhältnis behalten</label>
+                <small>bei Cover empfohlen aktiviert zu lassen</small>
+              </div>
+              <input id="keepAspect" type="checkbox" checked />
+            </div>
+
+            <div class="field-group">
+              <label for="quality">WebP Qualität <span id="qualityValue">82</span></label>
+              <input id="quality" type="range" min="40" max="100" value="82" />
+            </div>
+
+            <button id="convertBtn" class="primary" disabled>Alle Bilder konvertieren</button>
+          </div>
+        </div>
+
+        <div class="panel panel-preview">
+          <div class="preview-head">
+            <div>
+              <h2>Vorschau & Ergebnis</h2>
+              <p class="subline">Erstes Bild als Preview, alle Dateien gesammelt als Download-Liste.</p>
+            </div>
+            <span id="statusPill" class="status idle">Warte auf Upload</span>
+          </div>
+
+          <div class="preview-grid">
+            <div class="preview-box">
+              <h3>Original</h3>
+              <div class="image-frame"><img id="sourcePreview" alt="Originalbild Vorschau" /></div>
+              <p id="sourceMeta" class="meta">Noch kein Bild geladen</p>
+            </div>
+            <div class="preview-box">
+              <h3>WebP Ergebnis</h3>
+              <div class="image-frame"><img id="resultPreview" alt="Konvertierte Vorschau" /></div>
+              <p id="resultMeta" class="meta">Noch keine Konvertierung</p>
+            </div>
+          </div>
+
+          <div class="result-list-box">
+            <div class="result-list-head">
+              <h3>Downloads</h3>
+              <button id="downloadAllBtn" class="secondary small disabled" type="button">Alle herunterladen (.zip)</button>
+            </div>
+            <div id="resultList" class="result-list empty">Noch keine Dateien konvertiert</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
